@@ -1,10 +1,11 @@
 <template>
   <div class="flex">
     <div class="w-1/2">
-      <form class="p-6 shadow" v-on:submit.prevent>
+      <form class="p-6" v-on:submit.prevent>
         <label class="block mt-4">
           <span class="text-gray-700">Description</span>
           <input
+            autofocus
             class="block form-input mt-1 w-full"
             v-model="ami_description"
             type="text"
@@ -19,40 +20,40 @@
           />
         </label>
         <label class="block mt-4">
-          <span class="text-gray-700">Virtualization type</span>
+          <span class="text-gray-700">Virtualization Type</span>
           <select
             class="block form-select mt-1 w-full"
             v-model="ami_virtualization_type"
           >
-            <option disabled value="">Virtualization type</option>
+            <option disabled value="">Virtualization Type</option>
             <option>paravirtual</option>
             <option>hvm</option>
           </select>
         </label>
         <div class="flex items-center mt-6">
           <button
-            class="bg-blue-500 font-semibold px-4 py-2 rounded-lg text-white"
+            class="bg-blue-500 border-2 border-blue-500 focus:outline-none font-semibold hover:bg-blue-600 hover:border-blue-600 mr-4 px-4 py-2 rounded-lg text-white"
             v-on:click="generate"
           >
             Generate
           </button>
-          <button class="font-semibold ml-4 text-gray-700">Clear</button>
-        </div>
-      </form>
-    </div>
-    <div class="bg-gray-100 p-6 w-1/2">
-      <div class="flex flex-col">
-        <!-- eslint-disable-next-line -->
-        <div class="font-mono mb-6 text-gray-700 whitespace-pre-wrap" id="template">{{ templateJson }}</div>
-        <div class="items-end">
           <button
-            class="bg-blue-500 font-semibold px-4 py-2 rounded-lg text-white"
+            class="border-2 border-black focus:outline-none font-semibold mr-4 px-4 py-2 rounded-lg"
             v-on:click="copy"
           >
             Copy
           </button>
+          <button
+            class="border-2 border-transparent focus:outline-none font-semibold px-4 py-2 text-gray-700"
+          >
+            Clear
+          </button>
         </div>
-      </div>
+      </form>
+    </div>
+    <div class="bg-gray-100 min-h-screen p-6 w-1/2">
+      <!-- eslint-disable-next-line -->
+      <div class="font-mono text-gray-700 whitespace-pre-wrap" id="template">{{ templateJson }}</div>
     </div>
   </div>
 </template>

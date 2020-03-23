@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto" id="app">
+  <div class="container min-w-full" id="app">
     <AmazonEBS />
   </div>
 </template>
