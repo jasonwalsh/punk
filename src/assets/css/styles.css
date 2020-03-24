@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.alert {
+  @apply bg-blue-100;
+  @apply border-l-4;
+  @apply border-blue-500;
+  @apply text-blue-700;
+  @apply p-4;
+  @apply mr-4;
+  @apply mb-4;
+}

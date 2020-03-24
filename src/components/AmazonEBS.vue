@@ -1,13 +1,14 @@
 <template>
-  <div class="flex">
-    <div class="font-bold w-1/2">
-      <h1 class="font-mono p-6 text-gray-700">Amazon EBS</h1>
-      <form class="min-h-screen px-6" v-on:submit.prevent>
+  <div class="flex flex-wrap items-stretch">
+    <div class="w-1/2">
+      <h1 class="font-mono p-6 text-gray-700">Amazon EBS Builder</h1>
+      <form class="px-6" v-on:submit.prevent>
         <label class="block mt-4">
           <span class="text-gray-700">Description</span>
           <input
             autofocus
             class="block form-input mt-1 w-full"
+            placeholder="The description to set for the resulting AMI"
             v-model="ami_description"
             type="text"
           />
@@ -16,6 +17,7 @@
           <span class="text-gray-700">Name</span>
           <input
             class="block form-input mt-1 w-full"
+            placeholder="The name of the resulting AMI"
             v-model="ami_name"
             type="text"
           />
@@ -38,10 +40,10 @@
             <option>hvm</option>
           </select>
         </label>
-        <div class="flex items-center mt-8">
-          <div class="w-1/2">
+        <div class="flex flex-wrap items-center mt-6">
+          <div class="block flex-grow">
             <button
-              class="bg-blue-500 border border-blue-500 focus:outline-none font-medium hover:bg-blue-600 hover:border-blue-600 mr-4 px-4 py-2 rounded text-white"
+              class="shadow bg-blue-500 border border-blue-500 focus:outline-none hover:bg-blue-600 hover:border-blue-600 mb-4 mr-4 px-4 py-2 rounded text-white"
               v-on:click="generate"
             >
               <span class="block flex items-center">
@@ -52,13 +54,13 @@
                   viewBox="0 0 20 20"
                 >
                   <path
-                    d="M10 0a10 10 0 1 1 0 20 10 10 0 0 1 0-20zM2 10a8 8 0 1 0 16 0 8 8 0 0 0-16 0zm10.54.7L9 14.25l-1.41-1.41L10.4 10 7.6 7.17 9 5.76 13.24 10l-.7.7z"
+                    d="M16.172 9l-6.071-6.071 1.414-1.414L20 10l-.707.707-7.778 7.778-1.414-1.414L16.172 11H0V9z"
                   />
                 </svg>
               </span>
             </button>
             <button
-              class="border border-black focus:outline-none font-medium mr-4 px-4 py-2 rounded"
+              class="shadow border border-transparent focus:outline-none hover:bg-gray-200 mb-4 mr-4 px-4 py-2 rounded"
               v-on:click="copy"
             >
               <span class="block flex items-center">
@@ -75,21 +77,25 @@
               </span>
             </button>
           </div>
-          <div class="text-right w-1/2">
-            <button
-              class="border border-transparent focus:outline-none font-medium hover:text-gray-900 px-4 py-2 text-gray-700"
-              v-on:click="clear"
-            >
-              Clear
-            </button>
-          </div>
+          <button
+            class="shadow border border-transparent focus:outline-none hover:bg-gray-200 mb-4 px-4 py-2 rounded"
+            v-on:click="clear"
+          >
+            Clear
+          </button>
         </div>
       </form>
     </div>
-    <div class="bg-gray-100 min-h-screen p-6 text-gray-700 w-1/2">
-      <h1 class="font-bold font-mono mb-8 select-none">template.json</h1>
+    <div class="bg-gray-100 p-6 text-gray-700 w-1/2">
+      <h1 class="font-mono mb-8 select-none">template.json</h1>
       <!-- eslint-disable-next-line -->
       <div class="font-mono text-gray-700 whitespace-pre-wrap" id="template">{{ templateJson }}</div>
+      <notifications
+        classes="alert"
+        group="copy"
+        :max="1"
+        position="bottom right"
+      />
     </div>
   </div>
 </template>
@@ -109,6 +115,8 @@ export default {
       ami_virtualization_type: "paravirtual",
       region: "us-east-1",
       template: {
+        _comment:
+          "Template created using Punk: https://github.com/jasonwalsh/punk",
         builders: []
       }
     };
@@ -116,6 +124,8 @@ export default {
   methods: {
     clear: function() {
       this.template = {
+        _comment:
+          "Template created using Punk: https://github.com/jasonwalsh/punk",
         builders: []
       };
     },
@@ -129,6 +139,10 @@ export default {
       selection.addRange(range);
       document.execCommand("copy");
       selection.removeRange(range);
+      this.$notify({
+        group: "copy",
+        text: "Template copied to clipboard!"
+      });
     },
     generate: function() {
       // Remove the first element from the builders list to prevent appending.
