@@ -1,29 +1,61 @@
 <template>
   <div class="flex flex-wrap items-stretch">
-    <div class="w-1/2">
+    <div class="min-h-screen w-1/2">
       <h1 class="font-mono p-6 text-gray-700">Amazon EBS Builder</h1>
       <form class="px-6" v-on:submit.prevent>
+        <div class="flex items-center justify-between">
+          <label class="block mr-2 mt-4 w-1/2">
+            <span class="text-gray-700">Access Key</span>
+            <span class="block text-gray-600 text-xs"
+              >The access key used to communicate with AWS</span
+            >
+            <input
+              autofocus
+              class="block form-input mt-1 w-full"
+              v-model="access_key"
+              type="text"
+            />
+          </label>
+          <label class="block ml-2 mt-4 w-1/2">
+            <span class="text-gray-700">Secret Key</span>
+            <span class="block text-gray-600 text-xs"
+              >The secret key used to communicate with AWS</span
+            >
+            <input
+              class="block form-input mt-1 w-full"
+              v-model="secret_key"
+              type="password"
+            />
+          </label>
+        </div>
         <label class="block mt-4">
           <span class="text-gray-700">Description</span>
+          <span class="block text-gray-600 text-xs"
+            >The description to set for the resulting AMI</span
+          >
           <input
-            autofocus
             class="block form-input mt-1 w-full"
-            placeholder="The description to set for the resulting AMI"
             v-model="ami_description"
             type="text"
           />
         </label>
         <label class="block mt-4">
           <span class="text-gray-700">Name</span>
+          <span class="block text-gray-600 text-xs"
+            >The name of the resulting AMI</span
+          >
           <input
             class="block form-input mt-1 w-full"
-            placeholder="The name of the resulting AMI"
             v-model="ami_name"
             type="text"
           />
         </label>
         <label class="block mt-4">
           <span class="text-gray-700">Region</span>
+          <span class="block text-gray-600 text-xs"
+            >The name of the region in which to launch the EC2 instance to
+            create the AMI</span
+          >
           <select class="block form-select mt-1 w-full" v-model="region">
             <option disabled value="">Region</option>
             <option>us-east-1</option>
@@ -31,6 +63,9 @@
         </label>
         <label class="block mt-4">
           <span class="text-gray-700">Virtualization Type</span>
+          <span class="block text-gray-600 text-xs"
+            >The type of virtualization for the AMI you are building</span
+          >
           <select
             class="block form-select mt-1 w-full"
             v-model="ami_virtualization_type"
@@ -86,7 +121,7 @@
         </div>
       </form>
     </div>
-    <div class="bg-gray-100 font-mono p-6 text-gray-700 w-1/2">
+    <div class="bg-gray-100 font-mono min-h-screen p-6 text-gray-700 w-1/2">
       <div class="flex flex-grow flex-wrap items-center justify-between mb-8">
         <p class="block select-none">template.json</p>
         <label class="block flex flex-wrap items-center">
@@ -121,10 +156,12 @@ export default {
     return {
       indent: 2,
       // AMI Configuration
+      access_key: "",
       ami_description: "",
       ami_name: "",
       ami_virtualization_type: "paravirtual",
       region: "us-east-1",
+      secret_key: "",
       template: {
         _comment:
           "Template created using Punk: https://github.com/jasonwalsh/punk",
@@ -159,10 +196,12 @@ export default {
       // Remove the first element from the builders list to prevent appending.
       this.template.builders.pop();
       let builder = {};
+      builder.access_key = this.access_key;
       builder.ami_description = this.ami_description;
       builder.ami_name = this.ami_name;
       builder.ami_virtualization_type = this.ami_virtualization_type;
       builder.region = this.region;
+      builder.secret_key = this.secret_key;
       builder.type = "amazon-ebs";
       this.template.builders.push(builder);
     }
