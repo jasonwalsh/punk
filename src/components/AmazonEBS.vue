@@ -86,17 +86,27 @@
         </div>
       </form>
     </div>
-    <div class="bg-gray-100 p-6 text-gray-700 w-1/2">
-      <h1 class="font-mono mb-8 select-none">template.json</h1>
+    <div class="bg-gray-100 font-mono p-6 text-gray-700 w-1/2">
+      <div class="flex flex-grow flex-wrap items-center justify-between mb-8">
+        <p class="block select-none">template.json</p>
+        <label class="block flex flex-wrap items-center">
+          <span class="mr-2 select-none">Spaces</span>
+          <select class="block form-select" v-model="indent">
+            <option disabled value="">---</option>
+            <option>2</option>
+            <option>4</option>
+          </select>
+        </label>
+      </div>
       <!-- eslint-disable-next-line -->
-      <div class="font-mono text-gray-700 whitespace-pre-wrap" id="template">{{ templateJson }}</div>
-      <notifications
-        classes="alert"
-        group="copy"
-        :max="1"
-        position="bottom right"
-      />
+      <div class="text-gray-700 whitespace-pre-wrap" id="template">{{ templateJson }}</div>
     </div>
+    <notifications
+      classes="alert"
+      group="copy"
+      :max="1"
+      position="bottom right"
+    />
   </div>
 </template>
 
@@ -104,11 +114,12 @@
 export default {
   computed: {
     templateJson: function() {
-      return JSON.stringify(this.template, null, "  ");
+      return JSON.stringify(this.template, null, " ".repeat(this.indent));
     }
   },
   data: function() {
     return {
+      indent: 2,
       // AMI Configuration
       ami_description: "",
       ami_name: "",
