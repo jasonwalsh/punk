@@ -3,6 +3,8 @@
 </p>
 <p align="center">A GUI for generating Packer templates</p>
 
+View a live example of Punk [here](https://murmuring-forest-55290.herokuapp.com/)!
+
 ## Contents
 
 - [Motivation](#motivation)
