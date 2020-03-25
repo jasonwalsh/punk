@@ -1,20 +1,20 @@
 <template>
   <div class="flex flex-wrap items-stretch">
     <div class="min-h-screen w-1/2">
-      <h1 class="font-mono p-6 text-gray-700">
-        Amazon EBS Builder
+      <div class="flex flex-wrap items-center justify-between p-6">
+        <h1 class="font-mono text-gray-700">Amazon EBS Builder</h1>
         <a
-          class="hover:text-blue-600 text-blue-500 text-sm"
+          class="shadow bg-blue-500 leading-none px-4 py-2 rounded text-white text-sm hover:bg-blue-600"
           href="https://packer.io/docs/builders/amazon-ebs.html"
           target="_blank"
           >docs</a
         >
-      </h1>
+      </div>
       <form class="px-6" v-on:submit.prevent>
         <div class="flex items-center justify-between mt-4">
           <label class="block mr-2 w-1/2">
             <span class="text-gray-700">Access Key</span>
-            <span class="block text-gray-600 text-xs"
+            <span class="block text-gray-600 text-sm"
               >The access key used to communicate with AWS</span
             >
             <input
@@ -26,7 +26,7 @@
           </label>
           <label class="block ml-2 w-1/2">
             <span class="text-gray-700">Secret Key</span>
-            <span class="block text-gray-600 text-xs"
+            <span class="block text-gray-600 text-sm"
               >The secret key used to communicate with AWS</span
             >
             <input
@@ -38,7 +38,7 @@
         </div>
         <label class="block mt-4">
           <span class="text-gray-700">Region</span>
-          <span class="block text-gray-600 text-xs"
+          <span class="block text-gray-600 text-sm"
             >The name of the region in which to launch the EC2 instance to
             create the AMI</span
           >
@@ -49,7 +49,7 @@
         </label>
         <label class="block mt-4">
           <span class="text-gray-700">Source AMI</span>
-          <span class="block text-gray-600 text-xs"
+          <span class="block text-gray-600 text-sm"
             >The source AMI whose root volume will be copied and provisioned on
             the currently running instance</span
           >
@@ -61,7 +61,7 @@
         </label>
         <label class="block mt-4">
           <span class="text-gray-700">Name</span>
-          <span class="block text-gray-600 text-xs"
+          <span class="block text-gray-600 text-sm"
             >The name of the resulting AMI</span
           >
           <input
@@ -72,7 +72,7 @@
         </label>
         <label class="block mt-4">
           <span class="text-gray-700">Instance Type</span>
-          <span class="block text-gray-600 text-xs"
+          <span class="block text-gray-600 text-sm"
             >The EC2 instance type to use while building the AMI</span
           >
           <select class="block form-select mt-1 w-full" v-model="instance_type">
@@ -82,7 +82,7 @@
         </label>
         <label class="block mt-4">
           <span class="text-gray-700">SSH Username</span>
-          <span class="block text-gray-600 text-xs"
+          <span class="block text-gray-600 text-sm"
             >The username to connect to SSH with</span
           >
           <input
@@ -114,7 +114,7 @@
               class="shadow border border-transparent focus:outline-none hover:bg-gray-200 mb-4 mr-4 px-4 py-2 rounded"
               v-on:click="copy"
             >
-              <span class="block flex items-center">
+              <span class="block flex items-center text-gray-700">
                 Copy
                 <svg
                   class="fill-current h-3 ml-2 w-3"
@@ -129,7 +129,7 @@
             </button>
           </div>
           <button
-            class="shadow border border-transparent focus:outline-none hover:bg-gray-200 mb-4 px-4 py-2 rounded"
+            class="shadow border border-transparent focus:outline-none hover:bg-gray-200 mb-4 px-4 py-2 rounded text-gray-700"
             v-on:click="clear"
           >
             Clear
