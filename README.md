@@ -39,8 +39,10 @@ Getting started with Punk is easy, simply follow the instructions below:
 
 ### Docker
 
-    $ docker build -t punk .
-    $ docker run -p 8080:8080 -d punk
+**Note:** Even though this is a public repository, you still need to be authenticated to download this image. For more information, please refer to the official [documentation](https://help.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-docker-for-use-with-github-packages#authenticating-to-github-packages).
+
+    $ docker pull docker.pkg.github.com/jasonwalsh/punk/punk:latest
+    $ docker run -d -p 8080:8080 docker.pkg.github.com/jasonwalsh/punk/punk
 
 ## Limitations
 
