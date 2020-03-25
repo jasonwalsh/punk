@@ -1,0 +1,23 @@
+jobs:
+  release:
+    env:
+      GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Release
+        uses: cycjimmy/semantic-release-action@v2
+        with:
+          branch: master
+          extra_plugins: |
+            @semantic-release/changelog
+            @semantic-release/git
+name: Release
+'on':
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master

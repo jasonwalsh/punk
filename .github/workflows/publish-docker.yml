@@ -1,0 +1,21 @@
+jobs:
+  publish-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Publish Docker
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: jasonwalsh/punk/punk
+          password: '${{ secrets.GITHUB_TOKEN }}'
+          registry: docker.pkg.github.com
+          username: '${{ github.actor }}'
+name: Publish Docker
+'on':
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
