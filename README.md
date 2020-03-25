@@ -1,9 +1,8 @@
-<p align="center">
-  <img width="2032" src="https://user-images.githubusercontent.com/2184329/77548119-7c65b480-6e84-11ea-8582-c52bb8d9d539.png">
-</p>
-<p align="center">A GUI for generating Packer templates</p>
-
-View a live example of Punk [here](https://murmuring-forest-55290.herokuapp.com/)!
+<div align="center">
+  <img width="2032" src="https://user-images.githubusercontent.com/2184329/77548119-7c65b480-6e84-11ea-8582-c52bb8d9d539.png" />
+  <strong>A GUI for generating Packer templates</strong>
+  <p>View a live example of Punk <a href="https://murmuring-forest-55290.herokuapp.com">here</a>!</p>
+</div>
 
 ## Contents
 
