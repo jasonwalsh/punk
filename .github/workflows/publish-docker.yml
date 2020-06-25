@@ -8,14 +8,11 @@ jobs:
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
           name: jasonwalsh/punk/punk
-          password: '${{ secrets.GITHUB_TOKEN }}'
+          password: "${{ secrets.GITHUB_TOKEN }}"
           registry: docker.pkg.github.com
-          username: '${{ github.actor }}'
-name: Publish Docker
-'on':
-  pull_request:
-    branches:
-      - master
+          username: "${{ github.actor }}"
+name: Push image to registry
+"on":
   push:
     branches:
       - master
