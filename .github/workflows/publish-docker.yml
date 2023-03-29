@@ -5,7 +5,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Publish Docker
-        uses: elgohr/Publish-Docker-Github-Action@master
+        uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           name: jasonwalsh/punk/punk
           password: "${{ secrets.GITHUB_TOKEN }}"
